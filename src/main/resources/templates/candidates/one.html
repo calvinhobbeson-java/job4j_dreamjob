@@ -18,8 +18,8 @@
         <form class="mt-3" th:action="@{/candidates/update}" method="post" th:object="${candidate}">
             <input type="hidden" name="id" th:field="*{id}">
             <div class="mb-3">
-                <label for="title" class="form-label"><b>Название</b></label>
-                <input type="text" class="form-control" id="title" name="title" th:field="*{title}" placeholder="Название резюме">
+                <label for="name" class="form-label"><b>Название</b></label>
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Название резюме">
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label"><b>Описание</b></label>
