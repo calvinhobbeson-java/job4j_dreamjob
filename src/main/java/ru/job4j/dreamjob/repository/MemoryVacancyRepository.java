@@ -1,19 +1,23 @@
 package ru.job4j.dreamjob.repository;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Vacancy;
+
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
+@ThreadSafe
 public class MemoryVacancyRepository implements VacancyRepository {
-
+    @GuardedBy("this")
     private int nextId = 1;
 
-    private final Map<Integer, Vacancy> vacancies = new HashMap<>();
+    private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
         save(new Vacancy(0, "Intern Java Developer", "The vacancy of intern Java developer", LocalDateTime.now()));
@@ -27,13 +31,13 @@ public class MemoryVacancyRepository implements VacancyRepository {
     @Override
     public Vacancy save(Vacancy vacancy) {
         vacancy.setId(nextId++);
-        vacancies.put(vacancy.getId(), vacancy);
+        vacancies.putIfAbsent(vacancy.getId(), vacancy);
         return vacancy;
     }
 
     @Override
     public boolean deleteById(int id) {
-        return vacancies.remove(id) != null;
+        return vacancies.remove(id, vacancies.get(id));
     }
 
     @Override
