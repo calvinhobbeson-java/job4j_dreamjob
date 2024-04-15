@@ -4,6 +4,7 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.Vacancy;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -21,12 +22,12 @@ public class MemoryCandidateRepository implements CandidateRepository {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
     private MemoryCandidateRepository() {
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
-        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now()));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
+        save(new Candidate(0, "Oleg", "Candidate for a job", LocalDateTime.now(), true));
     }
 
     @Override
@@ -43,8 +44,9 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     @Override
     public boolean update(Candidate candidate) {
-        return candidates.computeIfPresent(candidate.getId(),
-                (id, oldCandidate) -> new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(), candidate.getCreationDate())) != null;
+        return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) -> {
+            return new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(), candidate.getCreationDate(), candidate.getVisible());
+        }) != null;
     }
 
     @Override

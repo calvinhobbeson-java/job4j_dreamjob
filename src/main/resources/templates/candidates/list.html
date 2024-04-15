@@ -32,6 +32,14 @@
                 </thead>
                 <tbody>
                 <tr th:each="candidate: ${candidates}">
+                    <td>
+              <span th:if="${candidate.visible}">
+                <i class="bi bi-check-square"></i>
+              </span>
+                        <span th:if="${!candidate.visible}">
+                  <i class="bi bi-square"></i>
+              </span>
+                    </td>
                     <td th:text="${candidate.id}"/>
                     <td><a th:text="${candidate.name}" th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}"></a>
                     </td>
