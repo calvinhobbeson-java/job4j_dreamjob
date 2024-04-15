@@ -10,12 +10,13 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 @ThreadSafe
 public class MemoryCandidateRepository implements CandidateRepository {
     @GuardedBy("this")
-    private int nextId = 1;
+    private AtomicInteger nextId = new AtomicInteger(1);
 
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
@@ -30,7 +31,7 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     @Override
     public Candidate save(Candidate candidate) {
-        candidate.setId(nextId++);
+        candidate.setId(nextId.incrementAndGet());
         candidates.putIfAbsent(candidate.getId(), candidate);
         return candidate;
     }
