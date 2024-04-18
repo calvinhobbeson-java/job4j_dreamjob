@@ -21,12 +21,12 @@ public class MemoryVacancyRepository implements VacancyRepository {
     private final Map<Integer, Vacancy> vacancies = new ConcurrentHashMap<>();
 
     private MemoryVacancyRepository() {
-        save(new Vacancy(0, "Intern Java Developer", "The vacancy of intern Java developer", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Junior Java Developer", "The vacancy of Junior Java developer", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Junior+ Java Developer", "The vacancy of Junior+ Java developer", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Middle Java Developer", "The vacancy of Middle Java developer", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Middle+ Java Developer", "The vacancy of Middle+ Java developer", LocalDateTime.now(), true));
-        save(new Vacancy(0, "Senior Java Developer", "The vacancy of Senior Java developer", LocalDateTime.now(), true));
+        save(new Vacancy(0, "Intern Java Developer", "The vacancy of intern Java developer", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Junior Java Developer", "The vacancy of Junior Java developer", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Junior+ Java Developer", "The vacancy of Junior+ Java developer", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Middle Java Developer", "The vacancy of Middle Java developer", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Middle+ Java Developer", "The vacancy of Middle+ Java developer", LocalDateTime.now(), true, 1));
+        save(new Vacancy(0, "Senior Java Developer", "The vacancy of Senior Java developer", LocalDateTime.now(), true, 1));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class MemoryVacancyRepository implements VacancyRepository {
     @Override
     public boolean update(Vacancy vacancy) {
         return vacancies.computeIfPresent(vacancy.getId(), (id, oldVacancy) -> {
-            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible());
+            return new Vacancy(oldVacancy.getId(), vacancy.getTitle(), vacancy.getDescription(), vacancy.getCreationDate(), vacancy.getVisible(), vacancy.getCityId());
         }) != null;
     }
 
