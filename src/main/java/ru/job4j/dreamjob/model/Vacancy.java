@@ -1,29 +1,36 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 public class Vacancy {
 
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "title", "title",
+            "description", "description",
+            "creation_date", "creationDate",
+            "visible", "visible",
+            "city_id", "cityId",
+            "file_id", "fileId"
+    );
+
     private int id;
+
     private String title;
+
     private String description;
+
     private LocalDateTime creationDate = LocalDateTime.now();
+
     private boolean visible;
+
     private int cityId;
+
     private int fileId;
 
     public Vacancy() {
-    }
-
-    public Vacancy(int id, String title, String description, LocalDateTime creationDate, boolean visible, int cityId, int fileId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.creationDate = creationDate;
-        this.visible = visible;
-        this.cityId = cityId;
-        this.fileId = fileId;
     }
 
     public int getId() {
@@ -42,39 +49,6 @@ public class Vacancy {
         this.title = title;
     }
 
-    public boolean getVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public int getFileId() {
-        return fileId;
-    }
-
-    public void setFileId(int fileId) {
-        this.fileId = fileId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Vacancy vacancy = (Vacancy) o;
-        return id == vacancy.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public String getDescription() {
         return description;
     }
@@ -91,11 +65,27 @@ public class Vacancy {
         this.creationDate = creationDate;
     }
 
+    public boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
     public int getCityId() {
         return cityId;
     }
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    public int getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
     }
 }
