@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 public class Candidate {
@@ -15,6 +16,16 @@ public class Candidate {
 
     public Candidate() {
     }
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "name", "name",
+            "description", "description",
+            "creation_date", "creationDate",
+            "visible", "visible",
+            "city_id", "cityId",
+            "file_id", "fileId"
+    );
 
     public Candidate(int id, String name, String description, LocalDateTime creationDate, boolean visible, int cityId, int fileId) {
         this.id = id;
@@ -65,6 +76,7 @@ public class Candidate {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+
     public int getCityId() {
         return cityId;
     }
