@@ -26,7 +26,6 @@ public class Sql2oVacancyRepository implements VacancyRepository {
             var query = connection.createQuery(sql, true)
                     .addParameter("title", vacancy.getTitle())
                     .addParameter("description", vacancy.getDescription())
-                    .addParameter("creationDate", vacancy.getCreationDate())
                     .addParameter("visible", vacancy.getVisible())
                     .addParameter("cityId", vacancy.getCityId())
                     .addParameter("fileId", vacancy.getFileId());
