@@ -51,7 +51,7 @@ public class Sql2oCandidateRepository implements CandidateRepository {
         try (var connection = sql2o.open()) {
             var sql = """
                     UPDATE candidates
-                    SET name = :name, description = :description, creation_date = :creationDate, visible = :visible, 
+                    SET name = :name, description = :description, visible = :visible, 
                     city_id = : cityId, file_id = :fileId 
                     WHERE id = :id
                     """;
