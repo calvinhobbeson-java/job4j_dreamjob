@@ -1,9 +1,7 @@
 package ru.job4j.dreamjob.repository;
 
-import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.Vacancy;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -56,7 +54,7 @@ public class Sql2oCandidateRepository implements CandidateRepository {
                     WHERE id = :id
                     """;
             var query = connection.createQuery(sql)
-                    .addParameter("title", candidate.getName())
+                    .addParameter("name", candidate.getName())
                     .addParameter("description", candidate.getDescription())
                     .addParameter("visible", candidate.getVisible())
                     .addParameter("cityId", candidate.getCityId())
