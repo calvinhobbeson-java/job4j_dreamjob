@@ -1,16 +1,13 @@
 package ru.job4j.dreamjob.repository;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import ru.job4j.dreamjob.configuration.DatasourceConfiguration;
 import ru.job4j.dreamjob.model.User;
 
-import java.util.List;
 import java.util.Properties;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class Sql2oUserRepositoryTest {
 
@@ -35,8 +32,15 @@ class Sql2oUserRepositoryTest {
 
     @Test
     public void whenAddUserThenUserIsAdded() {
-        var user = sql2oUserRepository.save(new User(0, "asdfasdfg", "alsidhjfb", "sdfg"));
+        var user = sql2oUserRepository.save(new User(1, "asdfasdfg", "alsidhjfb", "sdfg"));
         var result = sql2oUserRepository.findByEmailAndPassword("asdfasdfg", "sdfg");
-        assertThat(result).isEqualTo(user);
-}
+        assertThat(result.get().getName()).isEqualTo("alsidhjfb");
+    }
+
+    @Test
+    public void whenAddTwoUsersThenNothing() {
+        sql2oUserRepository.save(new User(2, "asdfasdfg", "OLEG", "sdfg"));
+        var result = sql2oUserRepository.findByEmailAndPassword("asdfasdfg", "sdfg");
+        assertThat(result.get().getName()).isEqualTo("alsidhjfb");
+    }
 }
