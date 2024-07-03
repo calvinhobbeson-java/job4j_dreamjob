@@ -22,10 +22,4 @@ public class IndexController {
         model.addAttribute("user", user);
         return "index";
     }
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/users/login";
-    }
-
 }

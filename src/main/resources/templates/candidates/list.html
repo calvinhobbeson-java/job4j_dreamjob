@@ -19,37 +19,40 @@
 </head>
 <body>
 <div class="container-fluid p-0">
-    <header th:insert="blocks/header :: header"></header>
-    <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th><i class="bi bi-square"></i></th>
-                    <th scope="col">#</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Дата создания</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="candidate: ${candidates}">
-                    <td>
+    <div class="container-fluid p-0">
+        <header th:insert="blocks/header :: header"></header>
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><i class="bi bi-square"></i></th>
+                        <th scope="col">#</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Дата создания</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="candidate: ${candidates}">
+                        <td>
               <span th:if="${candidate.visible}">
                 <i class="bi bi-check-square"></i>
               </span>
-                        <span th:if="${!candidate.visible}">
+                            <span th:if="${!candidate.visible}">
                   <i class="bi bi-square"></i>
               </span>
-                    </td>
-                    <td th:text="${candidate.id}"/>
-                    <td><a th:text="${candidate.name}" th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}"></a></td>
-                    <td th:text="${candidate.creationDate}"/>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                        <td th:text="${candidate.id}"/>
+                        <td><a th:text="${candidate.name}"
+                               th:href="@{/candidates/{candidateId}(candidateId=${candidate.id})}"></a></td>
+                        <td th:text="${candidate.creationDate}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <footer th:insert="blocks/footer :: footer"></footer>
     </div>
-    <footer th:insert="blocks/footer :: footer"></footer>
 </div>
 </body>
 </html>

@@ -12,7 +12,6 @@ import ru.job4j.dreamjob.service.CandidateService;
 import ru.job4j.dreamjob.service.CityService;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 
 @Controller
@@ -28,7 +27,7 @@ public class CandidateController {
         this.cityService = cityService;
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public String getAll(Model model, HttpSession session) {
         var user = (User) session.getAttribute("user");
         if (user == null) {
