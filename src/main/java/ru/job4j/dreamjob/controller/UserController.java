@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
