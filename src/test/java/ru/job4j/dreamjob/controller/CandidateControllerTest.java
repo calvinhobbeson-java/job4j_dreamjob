@@ -44,11 +44,9 @@ public class CandidateControllerTest {
         var candidate2 = new Candidate(2, "test2", "desc2", now(), false, 3, 4);
         var expectedCandidates = List.of(candidate1, candidate2);
         when(candidateService.findAll()).thenReturn(expectedCandidates);
-
         var model = new ConcurrentModel();
         var view = candidateController.getAll(model);
         var actualCandidates = model.getAttribute("candidates");
-
         assertThat(view).isEqualTo("candidates/list");
         assertThat(actualCandidates).isEqualTo(expectedCandidates);
     }
